@@ -1,25 +1,24 @@
-package com.example.kimchiroom
+package eu.tutorials.roomdemo
 
 import androidx.room.*
+import com.example.kimchiroom.EmployeeEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EmployeeDao {
-  @Insert
-  suspend fun insert(employeeEntity: EmployeeEntity)
 
-  @Update
-  suspend fun update(employeeEntity: EmployeeEntity)
+    @Insert
+    suspend fun insert(employeeEntity: EmployeeEntity)
 
-  @Delete
-  suspend fun delete(employeeEntity: EmployeeEntity)
+    @Update
+    suspend fun update(employeeEntity: EmployeeEntity)
 
-  @Query("SELECT * FROM `employee-table`")
-  fun fetchAllEmployees(): Flow<List<EmployeeEntity>>
-  // Flow belongs to coroutine class notify something change
+    @Delete
+    suspend fun delete(employeeEntity: EmployeeEntity)
 
-  @Query("SELECT * FROM `employee-table` where id=:id" )
-  fun fetchAllEmployeeById(id: Int): Flow<EmployeeEntity>
-  // Flow belongs to coroutine class notify something change
+    @Query("Select * from `employee-table`")
+    fun fetchAllEmployee():Flow<List<EmployeeEntity>>
 
+    @Query("Select * from `employee-table` where id=:id")
+    fun fetchEmployeeById(id:Int):Flow<EmployeeEntity>
 }
